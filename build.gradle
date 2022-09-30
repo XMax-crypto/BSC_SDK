@@ -1,0 +1,59 @@
+
+buildscript {
+    ext {
+        springBootVersion = '2.5.5'
+    }
+    repositories {
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        mavenCentral()
+        mavenLocal()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath 'org.web3j:web3j-gradle-plugin:0.1.6'
+    }
+}
+
+plugins {
+    id('maven-publish')
+    id('java')
+    id('war')
+}
+
+group 'dev.bsc'
+version '1.0-SNAPSHOT'
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'org.springframework.boot'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile(
+            "org.springframework.boot:spring-boot-starter-web",
+            "org.springframework.boot:spring-boot-starter-aop",
+            "org.springframework.boot:spring-boot-starter-websocket"
+    )
+    compile "org.web3j:core:5.0.0"
+    compile "org.web3j:geth:5.0.0"
+    compile "org.web3j:codegen:5.0.0"
+    testCompile "junit:junit:4.12"
+    compile 'com.github.lianjiatech:retrofit-spring-boot-starter:2.2.17'
+    compile 'com.alibaba:fastjson:1.2.78'
+    compile group: 'org.apache.shiro', name: 'shiro-spring', version: '1.4.0'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+    compileOnly 'org.projectlombok:lombok:1.18.22'
+    annotationProcessor 'org.projectlombok:lombok:1.18.22'
+    testCompileOnly 'org.projectlombok:lombok:1.18.22'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.22'
+    compile "org.beykery:willwallet:1.0.5"
+
+}
+
+test {
+    useJUnitPlatform()
+}
